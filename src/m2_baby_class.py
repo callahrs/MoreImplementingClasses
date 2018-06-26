@@ -2,7 +2,7 @@
 A   Baby   class and methods that use the Baby class.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Riley Callahan.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 
@@ -91,9 +91,25 @@ def main():
 ########################################################################
 
 
+class Baby(object):
+    def __init__(self, name):
+        self.name = name
+        print('Hello baby ' + self.name + '!')
+        self.hours = 0
 
+    def feed_baby(self):
+        print('Thank you for feeding baby ' + self.name + '.')
+        self.hours = 0
 
-
+    def hour_passes(self):
+        if self.hours == 0:
+            print('Baby ' + self.name + ' is sleeping.')
+        if self.hours == 1:
+            print('Baby ' + self.name + ' is awake.  Time for food.')
+        if self.hours > 1:
+            print(
+                'Baby ' + self.name + ' is CRYING uncontrollably!  Feed the Baby!')
+        self.hours = self.hours + 1
 
 
 # ----------------------------------------------------------------------
