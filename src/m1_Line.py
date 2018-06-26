@@ -3,11 +3,12 @@ A simple   Line   class.
 NOTE: This is NOT rosegraphics -- it is your OWN Line class.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Riley Callahan.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import m1t_test_Line as m1t
+
 
 ########################################################################
 # IMPORTANT:
@@ -60,6 +61,7 @@ def main():
         run_test_is_parallel()
     if m1t.is_implemented('reset'):
         run_test_reset()
+
 
 ########################################################################
 # Students:
@@ -226,6 +228,12 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
+        self.start = start.clone()
+        self.end = end.clone()
+        self.clonetimes = 0
+        self.orignalstart = start.clone()
+        self.orignalend = end.clone()
+
     def __repr__(self):
         """
         What comes in:
@@ -335,6 +343,9 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
+        self.clonetimes = self.clonetimes + 1
+        return Line(self.start.clone(), self.end.clone())
+
     def reverse(self):
         """
         What comes in:
@@ -367,6 +378,10 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
+
+        temp = self.start
+        self.start = self.end
+        self.end = temp
 
     def slope(self):
         """
@@ -404,6 +419,12 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
+        if (self.end.x - self.start.x) == 0:
+            temp = math.inf
+        else:
+            temp = ((self.end.y - self.start.y) / (self.end.x - self.start.x))
+        return temp
+
     def length(self):
         """
         What comes in:
@@ -436,6 +457,8 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
+
+        return self.start.distance_from(self.end)
 
     def get_number_of_clones(self):
         """
@@ -477,6 +500,8 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
+        return self.clonetimes
+
     def line_plus(self, other_line):
         """
         What comes in:
@@ -510,6 +535,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
+
+        return Line(self.start.plus(other_line.start), self.end.plus(
+            other_line.end))
 
     def line_minus(self, other_line):
         """
@@ -545,6 +573,9 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
+        return Line(self.start.minus(other_line.start), self.end.minus(
+            other_line.end))
+
     def midpoint(self):
         """
         What comes in:
@@ -572,6 +603,8 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
+        return self.start.halfway_to(self.end)
+
     def is_parallel(self, line2):
         """
         What comes in:
@@ -598,6 +631,11 @@ class Line(object):
           :type  line2: Line
           :rtype: bool
         """
+
+        if round(self.slope(), 10) == round(line2.slope(), 10):
+            return True
+        else:
+            return False
         # --------------------------------------------------------------
         # TODO: 12.
         #   a. READ the above specification, including the Example.
@@ -672,6 +710,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
+
+        self.start = self.orignalstart
+        self.end = self.orignalend
 
 
 ########################################################################
